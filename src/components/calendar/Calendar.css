@@ -1,0 +1,94 @@
+
+.calendar {
+    width: 500px;
+    height: 450px;
+
+    background-color: #313138;
+
+    box-shadow: 5px, 5px, 5px, #aaaa;
+
+}
+
+.calendar-header {
+    width: 500px;
+    height: 7.5rem;
+
+    padding: 0;
+
+    background-color: #167e56;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    text-align: center;
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.calendar-header i {
+    margin: 0 20px;
+
+    cursor: pointer;
+
+    font-size: 2.7rem;
+}
+
+.calendar-header h2 {
+    font-size: 3rem;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.calendar-weekdays {
+    height: 1.5rem;
+
+    padding: 0 0 .3rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    column-gap: 0px;
+}
+
+.calendar-weekdays p {
+    color: rgba(150, 150, 150, 0.7);
+    font-size: .85rem;
+    text-align: center;
+}
+
+.calendar-days {
+    width: 100%;
+    height: calc(450px - 7.5rem - 1.7rem);
+
+    padding-bottom: 2px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    column-gap: 0px;
+}
+
+.day {
+    width: calc(500px/7);
+
+    display: flex;
+    justify-content: center;
+
+    /* border: 2px solid #313138; */
+
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+
+}
+
+.today {
+    outline: solid 1px #167e56;
+}
+
+.day:hover {
+    outline: solid 1.2px rgba(161, 161, 161, 45);
+}
+
+.preMonthDays {
+    color:rgba(150, 150, 150, 0.5);
+}
+
+.postMonthDays {
+    color:rgba(150, 150, 150, 0.5);
+}
