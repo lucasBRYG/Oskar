@@ -12,3 +12,4 @@ I started with the idea for just a simple planner. Then I watched Iron Man and w
 
 [3-16-21 devlog](https://github.com/lucasBRYG/oskar/blob/main/assets/devlog/3-16-21.md)
 
+[3-17-21 devlog](https://github.com/lucasBRYG/oskar/blob/main/assets/devlog/3-17-21.md)
