@@ -19,3 +19,7 @@ I started with the idea for just a simple planner. Then I watched Iron Man and w
 [3-19-21 devlog](https://github.com/lucasBRYG/oskar/blob/main/assets/devlog/3-19-21.md)
 
 [3-20-21 devlog](https://github.com/lucasBRYG/oskar/blob/main/assets/devlog/3-20-21.md)
+
+[3-21-21 devlog](https://github.com/lucasBRYG/oskar/blob/main/assets/devlog/3-21-21.md)
+
+[3-22-21 devlog](https://github.com/lucasBRYG/oskar/blob/main/assets/devlog/3-22-21.md)
