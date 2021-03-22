@@ -1,19 +1,32 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from "react";
+
+import Today from "./Today";
+
+import Forecast from "./forecastClass"; // imports the forecast class. <new Forecast(icon, temp, description, time)> 
 
 export default function Weather() {
 
-    const currentWeatherURL = "https://api.openweathermap.org/data/2.5/forecast?q=baltimore,maryland}&appid=4395e19d6c9918410c93c56342e6c903";
-    let currentWeatherObject = {
-        city: "",
-        temperature: 0,
-        windSpeed: 0,
-        uvi: 0,
-        icon: ""
-    };
+    const [weatherState, setWeatherState] = useState({
+        city: "Baltimore, Maryland",
+        date: new Date(),
+        current: {},
+        hourly: [],
+        future: {
+
+        }
+    })
+
+    const currentWeatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${weatherState.city}&units=imperial&appid=4395e19d6c9918410c93c56342e6c903`;
 
     useEffect(() => {
-        fetch(currentWeatherURL).then(res => res.json()).then(data => console.log(data));
-    })
+        
+        fetch(currentWeatherURL)
+        .then(res => res.json())
+        .then(data => {
+            setWeatherState({...weatherState, current: new Forecast(data.list[0].weather[0].icon, data.list[0].main.temp, data.list[0].weather[0].description, data.list[0].dt)});
+        })
+        .catch(err => "ERROR #" + err.cod + ": " + err.message); // this will catch error messages from the openWeather API call
+    }, [])
     //data.city = location data - object
     //data.cnt = number of individual forcasts in array(0-40) - int
     //data.list = list of individual forcasts - array
@@ -36,9 +49,17 @@ export default function Weather() {
     return (
         <div>
             Weather
+            <Today icon = {weatherState.current.icon} temp = {weatherState.current.temp} description = {weatherState.current.description} date = {`${weatherState.date.getMonth() + 1}/${weatherState.date.getDate()}`}/>
         </div>
     )
 }
+
+
+
+
+
+
+
 
 // ALL OF THIS IS FOR THE CURRENT WEATHER API {
     // useEffect(() => {
