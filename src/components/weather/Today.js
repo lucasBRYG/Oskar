@@ -1,7 +1,9 @@
 import React from 'react'
 
 export default function Today(props) {
+    console.log(props)
     return (
+        
         <div>
             <h1>
                 {props.date}

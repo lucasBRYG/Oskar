@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
 
 import Today from "./Today";
+import Hourly from "./Hourly";
 
 import Forecast from "./forecastClass"; // imports the forecast class. <new Forecast(icon, temp, description, time)> 
+import { logDOM } from "@testing-library/dom";
 
 export default function Weather() {
 
@@ -23,16 +25,26 @@ export default function Weather() {
         fetch(currentWeatherURL)
         .then(res => res.json())
         .then(data => {
-            setWeatherState({...weatherState, current: new Forecast(data.list[0].weather[0].icon, data.list[0].main.temp, data.list[0].weather[0].description, data.list[0].dt)});
+            // console.log(data.list[0].dt)
+            // console.log(data)
+            // console.log(new Date(data.list[0].dt * 1000).getHours());
+
+            let hourlyForcasts = [];
+            for (let i = 1; new Date(data.list[i].dt * 1000).getHours() <= 24 ; i++){
+                hourlyForcasts.push(new Forecast(data.list[i].weather[0].icon, data.list[i].main.temp, data.list[i].weather[0].description, new Date(data.list[i].dt * 1000)));
+            }
+
+            setWeatherState({...weatherState, current: new Forecast(data.list[0].weather[0].icon, data.list[0].main.temp, data.list[0].weather[0].description, new Date(data.list[0].dt * 1000))});
+            setWeatherState({...weatherState, hourly: hourlyForcasts});
         })
         .catch(err => "ERROR #" + err.cod + ": " + err.message); // this will catch error messages from the openWeather API call
     }, [])
-    //data.city = location data - object
+    //data.city = location data - object 
     //data.cnt = number of individual forcasts in array(0-40) - int
     //data.list = list of individual forcasts - array
-    //data.list[i].dt = unix timestamp - int
-    //data.list[i].main = conditions - object
-    //data.list[i].main.temp = current temp - int
+    //data.list[i].dt = unix timestamp - int                           1616522400 - 10:36 EST/ 2:36 UTC     -14400 - timezone
+    //data.list[i].main = conditions - object                         
+    //data.list[i].main.temp = current temp - int                     
     //data.list[i].main.feels_like = current 'feels like' temp - int
     //data.list[i].main.humidity = current humidity - int
     //data.list[i].main.pressure = current atmospheric pressure - int
@@ -50,6 +62,9 @@ export default function Weather() {
         <div>
             Weather
             <Today icon = {weatherState.current.icon} temp = {weatherState.current.temp} description = {weatherState.current.description} date = {`${weatherState.date.getMonth() + 1}/${weatherState.date.getDate()}`}/>
+            {weatherState.hourly.map(hour => {
+                return <Hourly icon = {hour.icon} temp = {hour.temp} decription = {hour.description} time = {hour.time}/>
+            })}
         </div>
     )
 }
